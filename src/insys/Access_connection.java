@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class Access_connection {
   Connection conn = null;
   static String TipoConexion;
-  static String servidor="jdbc:mysql://funeralescasasagrada.com:3306/funeral1_insys";
+  static String servidor="jdbc:mysql://servercctv.ddns.net:3306/funeral1_insys";
   //String user = "funeral1_usuario";
   //String pass = "Usuario16";
   String user = "funeral1_insysuser";
