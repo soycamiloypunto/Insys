@@ -76,7 +76,7 @@ public class Reportes extends javax.swing.JFrame {
     int Suma=0;
     int i=0;
         try {
-            Statement stmt = AC.conn.createStatement();
+            Statement stmt = AC.conn().createStatement();
             ResultSet rs = stmt.executeQuery("SELECT C.cod_cliente AS CCliente,  "
                     + "A.Nombres AS NomAfiliado, C.fecha_contrato AS FechaRegistro FROM Contratos C "
                     + "INNER JOIN Afiliados A ON A.ncontratovsafiliados=C.cod_cliente "
@@ -115,7 +115,7 @@ public class Reportes extends javax.swing.JFrame {
     int Suma=0;
     int i=0;
         try {
-            Statement stmt = AC.conn.createStatement();
+            Statement stmt = AC.conn().createStatement();
             ResultSet rs = stmt.executeQuery("SELECT C.cod_cliente AS CCliente,  "
                     + "A.Nombres AS NomAfiliado, C.fecha_contrato AS FechaRegistro, A.fecha_fallecimiento AS "
                     + "FFallecimiento FROM Contratos C "
@@ -157,7 +157,7 @@ public class Reportes extends javax.swing.JFrame {
     int Suma=0;
     int i=0;
         try {
-            Statement stmt = AC.conn.createStatement();
+            Statement stmt = AC.conn().createStatement();
             ResultSet rs = stmt.executeQuery("SELECT P.codcontratovspagos AS CCLiente, A.Nombres AS Titular, "
                     + "SUM(P.valor_a_pagar) AS VPagar, MAX(P.hasta) AS FHasta FROM Pagos P "
                     + "INNER JOIN Contratos C ON C.cod_cliente=P.codcontratovspagos "
@@ -200,7 +200,7 @@ public class Reportes extends javax.swing.JFrame {
     int Suma=0;
     int i=0;
         try {
-            Statement stmt = AC.conn.createStatement();
+            Statement stmt = AC.conn().createStatement();
             ResultSet rs = stmt.executeQuery("SELECT C.cod_cliente AS CCliente,  A.Nombres AS NomAfiliado, "
                     + "C.fecha_contrato AS FechaRegistro, MAX(P.Hasta) AS PHasta, "
                     + "TIMESTAMPDIFF(MONTH, MAX(P.Hasta), NOW()) AS NumMeses "
@@ -242,7 +242,7 @@ public class Reportes extends javax.swing.JFrame {
         int Suma=0;
         int i=0;
             try {
-                Statement stmt = AC.conn.createStatement();
+                Statement stmt = AC.conn().createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT C.cod_cliente AS CCliente,  A.Nombres AS NomAfiliado, "
                         + "C.contratoactivo AS CActivo FROM Contratos C "
                         + "INNER JOIN Afiliados A ON A.ncontratovsafiliados=C.cod_cliente "
@@ -273,7 +273,7 @@ public class Reportes extends javax.swing.JFrame {
     this.COMBOCobrador.removeAllItems();
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Nombres_Cobrador FROM Cobradores ORDER BY Nombres_Cobrador ASC");
       int i = 0;
       while (rs.next()) {

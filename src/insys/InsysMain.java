@@ -14,6 +14,6 @@ public class InsysMain {
     InicioSesion IS = new InicioSesion();
     IS.setLocationRelativeTo(null);
     IS.setVisible(true);
-    IS.ValidarCHECK();
+    //IS.ValidarCHECK();
   }
 }

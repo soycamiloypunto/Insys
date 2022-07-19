@@ -62,12 +62,12 @@ public class Acercade extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Version.setText("V1.2.3");
+        Version.setText("V1.2.4");
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("V1.2.3 (12102021)\n- Solución a un problema con el reporte que no mostraba los clientes activos actuales.\n\nV1.2.2 (06092021)\n- Corrección se reemplaza un afiliado al agregar otro.\n\nV1.2 (04082021)\n- Mejora de la velocidad\n- Mejora al guardar pagos\n- Nuevos atajos de teclados\n- Mejora al cargar registros de afiliados\n- Solución a un problema que impedía mostrar traslados y fechas de derechos\n\n\nV1.1 (09072021)\n\n- Corrección al limpiar contrato al buscar uno nuevo\n- Nuevos atajos de teclado para ver contrato y agregar pagos. \n- Mejora de velocidad\n\n\nV1.0\nPrimera Versión");
+        jTextArea1.setText("V1.2.4(19072022)\n- Mejora cadena de conexión\n\nV1.2.3 (12102021)\n- Solución a un problema con el reporte que no mostraba los clientes activos actuales.\n\nV1.2.2 (06092021)\n- Corrección se reemplaza un afiliado al agregar otro.\n\nV1.2 (04082021)\n- Mejora de la velocidad\n- Mejora al guardar pagos\n- Nuevos atajos de teclados\n- Mejora al cargar registros de afiliados\n- Solución a un problema que impedía mostrar traslados y fechas de derechos\n\n\nV1.1 (09072021)\n\n- Corrección al limpiar contrato al buscar uno nuevo\n- Nuevos atajos de teclado para ver contrato y agregar pagos. \n- Mejora de velocidad\n\n\nV1.0\nPrimera Versión");
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 

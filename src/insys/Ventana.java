@@ -186,7 +186,7 @@ public class Ventana extends javax.swing.JFrame {
     this.COMBOCiudadCobrador.removeAllItems();
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Ciudad FROM Ciudades ORDER BY CodigoCiudad ASC");
       int i = 0;
       while (rs.next()) {
@@ -211,7 +211,7 @@ public class Ventana extends javax.swing.JFrame {
     for (int i = 0; NumFilas > i; i++)
       modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Id_Vendedor, Nombres_Vendedor,Direccion_Vendedor, Telefono_Vendedor, ciudad "
               + "FROM Vendedores "
               + "INNER JOIN Ciudades ON Ciudades.codigociudad=Vendedores.Id_Ciudad_Vendedor "
@@ -281,7 +281,7 @@ public class Ventana extends javax.swing.JFrame {
     for (int i = 0; NumFilas > i; i++)
       modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Id_Cobrador, Nombres_Cobrador,Direccion_Cobrador, Telefono_Cobrador, ciudad "
               + "FROM Cobradores "
               + "INNER JOIN Ciudades ON Ciudades.codigociudad=Cobradores.Id_Ciudad_Cobrador "
@@ -347,7 +347,7 @@ public class Ventana extends javax.swing.JFrame {
     for (int i = 0; NumFilas > i; i++)
       modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT CodigoCiudad, Ciudad FROM Ciudades WHERE CodigoCiudad <> 0 ORDER BY Ciudad ASC");
       int j = 0;
       while (rs.next()) {
@@ -404,7 +404,7 @@ public class Ventana extends javax.swing.JFrame {
     for (int i = 0; NumFilas > i; i++)
       modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Id, Parentezco FROM Parentezcos "
               + "WHERE Id <> 0 ORDER BY Parentezco ASC");
       int j = 0;
@@ -460,9 +460,9 @@ public class Ventana extends javax.swing.JFrame {
     long Campo4 = Long.parseLong(this.TelefonoVendedor.getText());
     int Campo5 = this.COMBOCiudadVendedores.getSelectedIndex();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Vendedores VALUES (" + Campo1 + ",'" + Campo2 + "','" + Campo3 + "'," + Campo4 + "," + Campo5 + ")");
-      AC.conn.close();
+      AC.conn().close();
       this.IdVendedor.setText("");
       this.NombresVendedor.setText("");
       this.jTextField3.setText("");
@@ -472,7 +472,7 @@ public class Ventana extends javax.swing.JFrame {
     } catch (SQLException ex) {
       System.out.println("El Vendedor ya Existe se procede a actualizar");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Vendedores SET Nombres_Vendedor='" + Campo2 + "', Direccion_Vendedor='" + Campo3 + "', Telefono_Vendedor=" + Campo4 + ", Id_Ciudad_Vendedor=" + Campo5 + " WHERE Id_Vendedor=" + Campo1 + "");
         this.IdVendedor.setText("");
         this.NombresVendedor.setText("");
@@ -496,7 +496,7 @@ public class Ventana extends javax.swing.JFrame {
     String Campo4 = this.TelefonoCobrador.getText();
     int Campo5 = this.COMBOCiudadCobrador.getSelectedIndex();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Cobradores VALUES (" + Campo1 + ",'" + Campo2 + "','" + Campo3 + "','" + Campo4 + "'," + Campo5 + ")");
       this.IdCobrador.setText("");
       this.NombresCobrador.setText("");
@@ -507,7 +507,7 @@ public class Ventana extends javax.swing.JFrame {
     } catch (SQLException ex) {
       System.out.println("El Cobrador ya Existe se procede a actualizar");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Cobradores SET Nombres_Cobrador='" + Campo2 + "', Direccion_Cobrador='" + Campo3 + "', Telefono_Cobrador='" + Campo4 + "', Id_Ciudad_Cobrador=" + Campo5 + " WHERE Id_Cobrador=" + Campo1 + "");
         this.IdCobrador.setText("");
         this.NombresCobrador.setText("");
@@ -528,16 +528,16 @@ public class Ventana extends javax.swing.JFrame {
     int Campo1 = Integer.parseInt(campo1);
     String Campo2 = this.NombreCiudad.getText();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Ciudades VALUES (" + Campo1 + ",'" + Campo2 + "')");
-      AC.conn.close();
+      AC.conn().close();
       this.CodCiudad.setText("");
       this.NombreCiudad.setText("");
       AC.desconectar();
     } catch (SQLException ex) {
       System.out.println("La Ciudad ya Existe se procede a actualizar");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Ciudades SET Ciudad='" + Campo2 + "' WHERE CodigoCiudad=" + Campo1 + " ");
         this.CodCiudad.setText("");
         this.NombreCiudad.setText("");
@@ -555,16 +555,16 @@ public class Ventana extends javax.swing.JFrame {
     int Campo1 = Integer.parseInt(campo1);
     String Campo2 = this.TXTParentesco.getText();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Parentezcos VALUES (" + Campo1 + ",'" + Campo2 + "')");
-      AC.conn.close();
+      AC.conn().close();
       this.TXTCodParentesco.setText("");
       this.TXTParentesco.setText("");
       AC.desconectar();
     } catch (SQLException ex) {
       System.out.println("El Parentesco ya Existe se procede a actualizar");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Parentezcos SET Parentezco='" + Campo2 + "' WHERE Id=" + Campo1 + " ");
         this.TXTCodParentesco.setText("");
         this.TXTParentesco.setText("");
@@ -581,16 +581,16 @@ public class Ventana extends javax.swing.JFrame {
     int Campo1 = Integer.parseInt(this.TXTCodFuneraria.getText());
     String Campo2 = this.TXTFuneraria.getText();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Funerarias VALUES (" + Campo1 + ",'" + Campo2 + "')");
-      AC.conn.close();
+      AC.conn().close();
       this.TXTCodFuneraria.setText("");
       this.TXTFuneraria.setText("");
       AC.desconectar();
     } catch (SQLException ex) {
       System.out.println("La funeraria ya Existe se procede a actualizar");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Funerarias SET Nombre='" + Campo2 + "' WHERE Id=" + Campo1 + " ");
         this.TXTCodFuneraria.setText("");
         this.TXTFuneraria.setText("");
@@ -609,7 +609,7 @@ public class Ventana extends javax.swing.JFrame {
     for (int i = 0; NumFilas > i; i++)
       modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Id, Nombre FROM Funerarias WHERE Id <> 0 ORDER BY Nombre ASC");
       int j = 0;
       while (rs.next()) {
@@ -658,7 +658,7 @@ public class Ventana extends javax.swing.JFrame {
   public void EliminarFuneraria() {
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("DELETE FROM Funerarias WHERE Id=" + this.TABLAFuneraria.getValueAt(this.TABLAFuneraria.getSelectedRow(), 0) + "");
       System.out.println("Se ha eliminado correctamente la funeraria");
       AC.desconectar();
@@ -676,7 +676,7 @@ public class Ventana extends javax.swing.JFrame {
     for (int i = 0; NumFilas > i; i++)
       modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Id, Nombres,TipoUsuario, Nick, Pass  FROM UsuariosSistema "
               + "WHERE Nombres<>'Admin' ORDER BY Nombres ASC");
       int j = 0;
@@ -744,7 +744,7 @@ public class Ventana extends javax.swing.JFrame {
     String Campo4 = this.NickUsuario.getText();
     String Campo5 = this.PassUsuario.getText();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO UsuariosSistema VALUES (" + Campo1 + ",'" + Campo2 + "','" + Campo3 + "','" + Campo4 + "','" + Campo5 + "')");
       AC.desconectar();
       this.IdUsuario.setText("");
@@ -754,7 +754,7 @@ public class Ventana extends javax.swing.JFrame {
     } catch (SQLException ex) {
       System.out.println("El Usuario ya Existe se procede a actualizar");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE UsuariosSistema SET Nombres='" + Campo2 + "', TipoUsuario='" + Campo3 + "',Nick='" + Campo4 + "', Pass='" + Campo5 + "'WHERE Id=" + Campo1 + "");
         this.IdUsuario.setText("");
         this.NombresUsuarios.setText("");
@@ -989,7 +989,7 @@ public class Ventana extends javax.swing.JFrame {
     for (int i = 0; NumFilas > i; i++)
       modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Num_Contrato, Cod_Cliente, Nombres, Cedula FROM Contratos INNER JOIN Afiliados ON Contratos.Cod_Cliente = Afiliados.NContratovsAfiliados WHERE Num_Afiliado = 1");
       int j = 0;
       while (rs.next()) {
@@ -1029,7 +1029,7 @@ public class Ventana extends javax.swing.JFrame {
     
     
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Num_Contrato, Cod_Cliente, Nombres, Cedula "
               + "FROM Contratos LEFT JOIN Afiliados ON Contratos.Cod_Cliente = Afiliados.NContratovsAfiliados "
               + "WHERE Num_Contrato=" + BusquedaDatos + "");
@@ -1071,7 +1071,7 @@ public class Ventana extends javax.swing.JFrame {
     DefaultTableModel modelo = (DefaultTableModel)this.TABLABusClientes.getModel();
     
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Num_Contrato, Cod_Cliente, Nombres, Cedula "
               + "FROM Contratos "
               + "LEFT JOIN Afiliados ON Contratos.Cod_Cliente = Afiliados.NContratovsAfiliados "
@@ -1116,7 +1116,7 @@ public class Ventana extends javax.swing.JFrame {
 //    for (int i = 0; NumFilas > i; i++)
 //      modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Num_Contrato, Cod_Cliente, Nombres, Cedula "
               + "FROM Contratos LEFT JOIN Afiliados ON Contratos.Cod_Cliente = Afiliados.NContratovsAfiliados "
               + "WHERE Nombres LIKE '%" + BusquedaDatos + "%' ORDER BY Nombres ASC");
@@ -1162,7 +1162,7 @@ public class Ventana extends javax.swing.JFrame {
 //    for (int i = 0; NumFilas > i; i++)
 //      modelo.removeRow(0); 
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Num_Contrato, Cod_Cliente, Nombres, Cedula "
               + "FROM Contratos LEFT JOIN Afiliados ON Contratos.Cod_Cliente = Afiliados.NContratovsAfiliados "
               + "WHERE Cedula=" + BusquedaDatos + "");
@@ -1235,7 +1235,7 @@ public class Ventana extends javax.swing.JFrame {
     this.COMBOBarrio.removeAllItems();
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Ciudad FROM Ciudades ORDER BY CodigoCiudad ASC");
       int i = 0;
       while (rs.next()) {
@@ -1270,7 +1270,7 @@ public class Ventana extends javax.swing.JFrame {
     this.COMBOBarrio.addItem("Ninguno");
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Barrio FROM Barrios WHERE CodCiudad=" + CodCiudad + " ORDER BY Barrio ASC");
       int i = 0;
       while (rs.next()) {
@@ -1296,7 +1296,7 @@ public class Ventana extends javax.swing.JFrame {
     
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Parentezco FROM Parentezcos");
       int i = 0;
       while (rs.next()) {
@@ -1316,7 +1316,7 @@ public class Ventana extends javax.swing.JFrame {
     this.COMBOVendedor.removeAllItems();
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Nombres_Vendedor FROM Vendedores ORDER BY Id_Vendedor ASC");
       int i = 0;
       while (rs.next()) {
@@ -1343,7 +1343,7 @@ public class Ventana extends javax.swing.JFrame {
     this.COMBOFormadePago.removeAllItems();
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Forma_de_Pago FROM FormasPago ORDER BY Id ASC");
       int i = 0;
       while (rs.next()) {
@@ -1374,7 +1374,7 @@ public class Ventana extends javax.swing.JFrame {
     
     
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Num_Contrato,Cod_Cliente,Fecha_Contrato,Id_Ciudad,"
               + "Direccion,Barrio,Telefono,Id_Vendedor,Forma_Pago,Pago,Observaciones,ContratoActivo,"
               + "FechaInactividadContrato FROM Contratos WHERE Cod_Cliente= " + NCSeleccionado + "");
@@ -1435,7 +1435,7 @@ public class Ventana extends javax.swing.JFrame {
       int Cuenta=0;
       
       try {
-          Statement stmt1 = AC.conn.createStatement();
+          Statement stmt1 = AC.conn().createStatement();
           ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(cod_cliente) AS Cuenta FROM Contratos WHERE "
                   + "cod_cliente=" + CodCliente + " ");
           while (rs1.next()) {
@@ -1471,7 +1471,7 @@ public class Ventana extends javax.swing.JFrame {
             int Cuenta=0;
 
             try {
-                Statement stmt1 = AC.conn.createStatement();
+                Statement stmt1 = AC.conn().createStatement();
                 ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(cod_cliente) AS Cuenta FROM Contratos WHERE "
                         + "cod_cliente=" + CodCliente + " ");
                 while (rs1.next()) {
@@ -1559,7 +1559,7 @@ public class Ventana extends javax.swing.JFrame {
     String Campo13 = Formato.format(this.FECHAInactividadContrato.getDate());
     
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Contratos VALUES (" + Campo1 + "," + Campo2 + ","
               + "'" + Campo3 + "'," + Campo4 + ",'" + Campo5 + "','" + Campo6 + "','" + Campo7 + "',"
                       + "" + Campo8 + ",'" + Campo9 + "'," + Campo10 + ",'" + Campo11 + "','" + Campo12 + "',"
@@ -1611,7 +1611,7 @@ public class Ventana extends javax.swing.JFrame {
     String Campo13 = Formato.format(this.FECHAInactividadContrato.getDate());
     
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Contratos SET Num_Contrato= " + Campo2 + ",Fecha_Contrato='" + Campo3 + "', "
                 + "Id_Ciudad=" + Campo4 + ",Direccion='" + Campo5 + "',Barrio='" + Campo6 + "',"
                         + "Telefono='" + Campo7 + "',Forma_Pago=" + Campo8 + ",Pago=" + Campo9 + ","
@@ -1654,7 +1654,7 @@ public class Ventana extends javax.swing.JFrame {
         String NumContrato = this.TXTCodCliente.getText();
         DefaultTableModel modelo = (DefaultTableModel)this.TABLAAfiliados.getModel();
         try {
-          Statement stmt = AC.conn.createStatement();
+          Statement stmt = AC.conn().createStatement();
           ResultSet rs = stmt.executeQuery("SELECT IdAfiliado, Nombres, EdadAfiliado,Parentezco, "
                   + "Fallecido, Activo, Seguro_de_Vida, Fecha_Derechos,TipoUsuario, Traslados, "
                   + "Traslado_a_partir_de, Traslado_de "
@@ -1765,7 +1765,7 @@ public class Ventana extends javax.swing.JFrame {
         String NumContrato = this.TXTCodCliente.getText();
         DefaultTableModel modelo = (DefaultTableModel)this.TABLAAfiliados.getModel();
         try {
-          Statement stmt = AC.conn.createStatement();
+          Statement stmt = AC.conn().createStatement();
           ResultSet rs = stmt.executeQuery("SELECT IdAfiliado, Nombres, EdadAfiliado,Parentezco, "
                   + "Fallecido, Activo, Seguro_de_Vida, Fecha_Derechos,TipoUsuario, Traslados, "
                   + "Traslado_a_partir_de "
@@ -1804,7 +1804,7 @@ public class Ventana extends javax.swing.JFrame {
           log.warn("Hubo en error al cargar la tabla afiliados por que: "+ex);
         } 
         try {
-          Statement stmt1 = AC.conn.createStatement();
+          Statement stmt1 = AC.conn().createStatement();
           ResultSet rs1 = stmt1.executeQuery("SELECT Fecha_Derechos, Traslados, Traslado_a_partir_de, Traslado_de FROM Afiliados WHERE NContratovsAfiliados=" + NumContrato + " AND Num_Afiliado = 1");
           while (rs1.next()) {
             try {
@@ -1896,7 +1896,7 @@ public class Ventana extends javax.swing.JFrame {
     int NumFilaSeleccionada = this.TABLAAfiliados.getSelectedRow();
     Object NOrden = this.TABLAAfiliados.getValueAt(NumFilaSeleccionada, 0);
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT IdAfiliado,Num_Afiliado,Nombres,Cedula, "
               + "EdadAfiliado,Titular_Beneficiario,Id_Parentesco,Traslados,Traslado_de, "
               + "Traslado_a_partir_de, Fallecido,Fecha_Fallecimiento,Activo,FechaActivo,"
@@ -1920,23 +1920,23 @@ public class Ventana extends javax.swing.JFrame {
         String VSeguro = rs.getString("Valor_Seguro_de_Vida");
         String DFinal = rs.getString("Destino_Final");
         String Observaciones = rs.getString("Observaciones");
-        if (Access_connection.TipoConexion.equals("Local")) {
-          System.out.println("TIPO DE CONEXILOCAL");
-          try {
-            this.FECHATrasladoAfiliados.setDate(this.FormatoFecha2.parse(rs.getString("Traslado_a_partir_de")));
-            this.FECHAActivo.setDate(this.FormatoFecha2.parse(rs.getString("FechaActivo")));
-            this.FECHAFallecidoAfiliado.setDate(this.FormatoFecha2.parse(rs.getString("Fecha_Fallecimiento")));
-            this.FECHADerechosAfiliado.setDate(this.FormatoFecha2.parse(rs.getString("Fecha_Derechos")));
-          } catch (Exception e) {
-            System.out.println("No se pudo cargar fechas de Afiliados Locales por que " + e);
-          } 
-        } else {
+//        if (Access_connection.TipoConexion.equals("Local")) {
+//          System.out.println("TIPO DE CONEXILOCAL");
+//          try {
+//            this.FECHATrasladoAfiliados.setDate(this.FormatoFecha2.parse(rs.getString("Traslado_a_partir_de")));
+//            this.FECHAActivo.setDate(this.FormatoFecha2.parse(rs.getString("FechaActivo")));
+//            this.FECHAFallecidoAfiliado.setDate(this.FormatoFecha2.parse(rs.getString("Fecha_Fallecimiento")));
+//            this.FECHADerechosAfiliado.setDate(this.FormatoFecha2.parse(rs.getString("Fecha_Derechos")));
+//          } catch (Exception e) {
+//            System.out.println("No se pudo cargar fechas de Afiliados Locales por que " + e);
+//          } 
+//        } else {
           System.out.println("TIPO DE CONEXIINTERNET Fecha Fallecido:" + rs.getDate("Fecha_Fallecimiento"));
           this.FECHATrasladoAfiliados.setDate(rs.getDate("Traslado_a_partir_de"));
           this.FECHAActivo.setDate(rs.getDate("FechaActivo"));
           this.FECHAFallecidoAfiliado.setDate(rs.getDate("Fecha_Fallecimiento"));
           this.FECHADerechosAfiliado.setDate(rs.getDate("Fecha_Derechos"));
-        } 
+//        } 
         this.TXTIdAfiliado.setText(IdAfiliado);
         this.TXTCodClienteAfiliado.setText(NContratovsAfiliados);
         //this.TXTNumAfiliado.setText(NumAfiliado);
@@ -2082,7 +2082,7 @@ public class Ventana extends javax.swing.JFrame {
     System.out.println("Fecha Derechos Afiliado" + Campo14);
     String Campo15 = this.TXTAREAObservaciones.getText();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Afiliados VALUES (null," + Campo1 + "," + 0 + ",'" + Campo3 + "',"
               + "" + Cedula + "," + Campo4 + "," + TBeneficiario + "," + Campo5 + ",'" + Campo6 + "',"
                       + "'" + Campo7 + "','" + FTraslado + "','" + Campo8 + "','" + Campo9 + "','" + Campo10 + "',"
@@ -2167,7 +2167,7 @@ public class Ventana extends javax.swing.JFrame {
     
     System.out.println("El Afiliado ya Existe Se Procede A Actualizar el Cliente ");
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("UPDATE Afiliados SET Nombres='" + Campo3 + "',Cedula=" + Cedula + ","
               + "EdadAfiliado=" + Campo4 + ",Titular_Beneficiario=" + TBeneficiario + ","
                       + "Id_Parentesco=" + Campo5 + ",Traslados='" + Campo6 + "',"
@@ -2204,7 +2204,7 @@ public class Ventana extends javax.swing.JFrame {
     Access_connection AC = new Access_connection();
     
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("DELETE FROM Afiliados WHERE IdAfiliado=" + NumAfiliado + "");
       JOptionPane.showMessageDialog(null, "El Beneficiario: " + NomAfiliado + "  se eliminó del sistema." );
       LimpiarCampoAfiliados();
@@ -2280,7 +2280,7 @@ public class Ventana extends javax.swing.JFrame {
       Access_connection AC = new Access_connection();
       SimpleDateFormat Formato = new SimpleDateFormat("yyyy-MM-dd");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Contratos SET Pago=" + NuevoValor + " WHERE Cod_Cliente=" + CodCliente + "");
         AC.desconectar();
         JOptionPane.showMessageDialog(null, "Se ha guardado un nuevo Valor de Pago");
@@ -2341,7 +2341,7 @@ public class Ventana extends javax.swing.JFrame {
         LABELVersion1.setText(Acerca.Version.getText());
 
         try {
-            Statement stmt = AC.conn.createStatement();
+            Statement stmt = AC.conn().createStatement();
             ResultSet rs = stmt.executeQuery("SELECT Version "
                     + "FROM App_Version");
             while (rs.next()) {
@@ -2567,7 +2567,7 @@ public class Ventana extends javax.swing.JFrame {
   public void CargarNumCodigoPago() {
     Access_connection AC = new Access_connection();
     try {
-      Statement stmtPago = AC.conn.createStatement();
+      Statement stmtPago = AC.conn().createStatement();
       ResultSet rsPago = stmtPago.executeQuery("SELECT MAX(CodPago) as totalcuotas from Pagos");
       while (rsPago.next()) {
         String TCuotas = rsPago.getString("totalcuotas");
@@ -2596,7 +2596,7 @@ public class Ventana extends javax.swing.JFrame {
     String Campo7 = Formato.format(this.FECHAPagoHasta.getDate());
     int Campo8 = Integer.parseInt(this.TXTValorPagar.getText());
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Pagos VALUES (null,'" + Campo2 + "'," + Campo3 + ",'" + Campo4 + "',"
               + "" + Campo5 + ",'" + Campo6 + "','" + Campo7 + "'," + Campo8 + "," + DesdeDia + ","
                       + "" + DesdeMes + "," + DesdeAno + ")");
@@ -2616,14 +2616,14 @@ public class Ventana extends javax.swing.JFrame {
     long CodCliente = Long.parseLong(this.TXTCodCliente.getText());
     String FechaUltimoPago = FormatoFecha.format(this.FECHAPagoHasta.getDate());
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Contratos_FechaUltimoPago VALUES (" + CodCliente + ", '" + FechaUltimoPago + "')");
       AC.desconectar();
       System.out.println("Se ha Ingresado un Nuevo Cliente que ha pagado");
     } catch (SQLException ex) {
       System.out.println("El Cliente ya ha pagado se procede a actualizar fecha de Pago");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Contratos_FechaUltimoPago SET FechaUltimoPago='" + FechaUltimoPago + "' WHERE CodContratovsFechaUltimoPago=" + CodCliente + "");
         AC.desconectar();
         System.out.println("Se ha actualizado el Campo Fecha Ultimo Pago");
@@ -2650,7 +2650,7 @@ public class Ventana extends javax.swing.JFrame {
     
     try {
       
-      Statement stmtPago = AC.conn.createStatement();
+      Statement stmtPago = AC.conn().createStatement();
       ResultSet rsPago = stmtPago.executeQuery("SELECT CodPago,FRegistro, Depositante,Cuotas_Nulas,Desde,"
               + "Hasta,Valor_a_Pagar "
               + "FROM Pagos WHERE CodContratovsPagos= " + NCSeleccionado + " "
@@ -2743,7 +2743,7 @@ public class Ventana extends javax.swing.JFrame {
       int NumFilas = modelo.getRowCount();
       for (int i = 0; NumFilas > i; i++)
         modelo.removeRow(0); 
-      Statement stmtPago = AC.conn.createStatement();
+      Statement stmtPago = AC.conn().createStatement();
       ResultSet rsPago = stmtPago.executeQuery("SELECT CodPago,FRegistro, Depositante,Cuotas_Nulas,Desde,"
               + "Hasta,Valor_a_Pagar "
               + "FROM Pagos WHERE CodContratovsPagos= " + NCSeleccionado + " "
@@ -2774,7 +2774,7 @@ public class Ventana extends javax.swing.JFrame {
       Log.warn("No se pudo cargar Pagos: "+ex);
     } 
     try {
-      Statement stmtPago = AC.conn.createStatement();
+      Statement stmtPago = AC.conn().createStatement();
       ResultSet rsPago = stmtPago.executeQuery("SELECT count(CodPago) as totalcuotas, sum(Valor_a_Pagar) as suma from Pagos WHERE CodContratovsPagos=" + NCSeleccionado + "");
       while (rsPago.next()) {
         String TotalCuotas = rsPago.getString("totalcuotas");
@@ -2789,7 +2789,7 @@ public class Ventana extends javax.swing.JFrame {
     this.TXTCuotasNulas.setText("0");
     try {
       int Dias = 30;
-      Statement stmfecha = AC.conn.createStatement();
+      Statement stmfecha = AC.conn().createStatement();
       ResultSet rsFecha = stmfecha.executeQuery("SELECT MAX(Hasta) as FechaHasta from Pagos WHERE CodContratovsPagos= " + NCSeleccionado + "");
       while (rsFecha.next()) {
         Date FechaDesde = rsFecha.getDate("FechaHasta");
@@ -2854,14 +2854,14 @@ public class Ventana extends javax.swing.JFrame {
     long CodCliente = Long.parseLong(this.TXTCodCliente.getText());
     String FechaUltimoPago = Formato.format(this.FECHAPagoDesde.getDate());
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       stmt.executeUpdate("INSERT INTO Contratos_FechaUltimoPago VALUES (" + CodCliente + ", '" + FechaUltimoPago + "')");
       AC.desconectar();
       System.out.println("Se ha Ingresado un Nuevo Cliente que ha pagado");
     } catch (SQLException ex) {
       System.out.println("El Cliente ya ha pagado se procede a actualizar fecha de Pago");
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("UPDATE Contratos_FechaUltimoPago SET FechaUltimoPago='" + FechaUltimoPago + "' WHERE CodContratovsFechaUltimoPago=" + CodCliente + "");
         AC.desconectar();
         System.out.println("Se ha actualizado el Campo Fecha Ultimo Pago");
@@ -2879,7 +2879,7 @@ public class Ventana extends javax.swing.JFrame {
       String NPago = this.TABLAPagos.getValueAt(FilaSeleccionada, 0).toString();
       NumPago = Integer.parseInt(NPago);
       try {
-        Statement stmt = AC.conn.createStatement();
+        Statement stmt = AC.conn().createStatement();
         stmt.executeUpdate("DELETE FROM Pagos WHERE CodPago = " + NumPago + "");
         AC.desconectar();
 //        try {
@@ -2920,7 +2920,7 @@ public class Ventana extends javax.swing.JFrame {
     this.COMBOCobrador.removeAllItems();
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Nombres_Cobrador FROM Cobradores ORDER BY Nombres_Cobrador ASC");
       int i = 0;
       while (rs.next()) {
@@ -2963,7 +2963,7 @@ public class Ventana extends javax.swing.JFrame {
       Access_connection AC=new Access_connection();
       
         try {
-            Statement stmt = AC.conn.createStatement();
+            Statement stmt = AC.conn().createStatement();
             ResultSet rs = stmt.executeQuery("SELECT CodigoAfiliado, LugarD, Direccion, TMuerte, "
                     + "Velacion, TablasN, Iglesia, FechaH, Observaciones, Etapas, Traslado, TrasladoDe, "
                     + "TrasladoA, Cremacion, RealizaTraslado, Conductor, Tanatologo, Cementerio, "
@@ -3050,7 +3050,7 @@ public class Ventana extends javax.swing.JFrame {
         
 
         try {
-            Statement stmt = AC.conn.createStatement();
+            Statement stmt = AC.conn().createStatement();
             stmt.executeUpdate("INSERT INTO Servicios VALUES (" + Campo2 + ",'" + Campo3 + "',"
                     + "'" + Campo4 + "','" + Campo5 + "','" + Campo6 + "','" + Campo7 + "','" + Campo8 + "'"
                         + ",'" + Campo9 + "','" + Campo10 + "','" + Campo11 + "','" + Campo12 + "','" + Campo13 + "'"
@@ -3062,7 +3062,7 @@ public class Ventana extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println("no se puede guardar ordenservicio: "+ex+" Se actualiza la orden de servicio");
             try {
-                Statement stmt = AC.conn.createStatement();
+                Statement stmt = AC.conn().createStatement();
                 stmt.executeUpdate("UPDATE Servicios SET "
                         + "LugarD='" + Campo3 + "', "
                         + "Direccion='" + Campo4 + "', TMuerte='" + Campo5 + "', "

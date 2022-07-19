@@ -44,25 +44,25 @@ public class InicioSesion extends javax.swing.JFrame {
     } catch (Exception exception) {}
   }
   
-  void ValidarCHECK() {
-    if (this.InternetCHECK.isSelected()) {
-      Access_connection.TipoConexion = "Local";
-      System.out.println("Modo: Local");
-      String so = System.getProperty("os.name");
-      System.out.println("Sistema Operativo: " + so);
-      if (so.contains("Linux")) {
-        Access_connection.servidor = "jdbc:sqlite:" + this.HOME + "/Insys/funeral1_insys.db";
-      } else if (so.contains("Windows")) {
-        Access_connection.servidor = "jdbc:sqlite:C:\\SolucionesCYD\\Insys\\funeral1_insys.db";
-      } else if (so.contains("Mac")) {
-        Access_connection.servidor = "jdbc:sqlite:/Applications/Insys/funeral1_insys.db";
-      } 
-    } else {
-      System.out.println("Modo: Internet");
-      Access_connection.TipoConexion = "Internet";
-      Access_connection.servidor = "jdbc:mysql://funeralescasasagrada.com:3306/funeral1_insys";
-    } 
-  }
+//  void ValidarCHECK() {
+//    if (this.InternetCHECK.isSelected()) {
+////      Access_connection.TipoConexion = "Local";
+//      System.out.println("Modo: Local");
+//      String so = System.getProperty("os.name");
+//      System.out.println("Sistema Operativo: " + so);
+//      if (so.contains("Linux")) {
+//        Access_connection.servidor = "jdbc:sqlite:" + this.HOME + "/Insys/funeral1_insys.db";
+//      } else if (so.contains("Windows")) {
+//        Access_connection.servidor = "jdbc:sqlite:C:\\SolucionesCYD\\Insys\\funeral1_insys.db";
+//      } else if (so.contains("Mac")) {
+//        Access_connection.servidor = "jdbc:sqlite:/Applications/Insys/funeral1_insys.db";
+//      } 
+//    } else {
+//      System.out.println("Modo: Internet");
+////      Access_connection.TipoConexion = "Internet";
+//      Access_connection.servidor = "jdbc:mysql://funeralescasasagrada.com:3306/funeral1_insys";
+//    } 
+//  }
   
   private class NuevaVersion implements Runnable {
     private NuevaVersion() {}
@@ -81,7 +81,7 @@ public class InicioSesion extends javax.swing.JFrame {
   public void VerificarVersion() {
     Access_connection AC = new Access_connection();
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT Version FROM App_Version WHERE IdVersion=1");
       while (rs.next()) {
         System.out.println("VersionLocal: " + this.VersionLABEL.getText() + " VersionActual: " + rs.getString("Version"));
@@ -148,7 +148,7 @@ public class InicioSesion extends javax.swing.JFrame {
   public void IniciodeSesion() {
     Ventana V = new Ventana();
     V.CargarTablas();
-    Access_connection AC = new Access_connection();
+    MysqlConnect AC = new MysqlConnect();
     String Usuario = this.TXTUsuario.getText();
     char[] Pass = this.TXTPass.getPassword();
     String contrasena = new String(Pass);
@@ -163,7 +163,7 @@ public class InicioSesion extends javax.swing.JFrame {
     String SoloFecha = dia + "/" + mes + "/" + annio;
     System.out.println("Fecha: " + Fecha);
     try {
-      Statement stmt = AC.conn.createStatement();
+      Statement stmt = AC.conn().createStatement();
       ResultSet rs = stmt.executeQuery("SELECT id, nick, nombres, tipousuario, pass FROM UsuariosSistema "
               + "WHERE nick='" + Usuario + "'");
       if (rs.next()) {

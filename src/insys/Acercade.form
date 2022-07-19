@@ -72,7 +72,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="Version">
           <Properties>
-            <Property name="text" type="java.lang.String" value="V1.2.3"/>
+            <Property name="text" type="java.lang.String" value="V1.2.4"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -90,7 +90,7 @@
                 <Property name="columns" type="int" value="20"/>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="V1.2.3 (12102021)&#xa;- Soluci&#xf3;n a un problema con el reporte que no mostraba los clientes activos actuales.&#xa;&#xa;V1.2.2 (06092021)&#xa;- Correcci&#xf3;n se reemplaza un afiliado al agregar otro.&#xa;&#xa;V1.2 (04082021)&#xa;- Mejora de la velocidad&#xa;- Mejora al guardar pagos&#xa;- Nuevos atajos de teclados&#xa;- Mejora al cargar registros de afiliados&#xa;- Soluci&#xf3;n a un problema que imped&#xed;a mostrar traslados y fechas de derechos&#xa;&#xa;&#xa;V1.1 (09072021)&#xa;&#xa;- Correcci&#xf3;n al limpiar contrato al buscar uno nuevo&#xa;- Nuevos atajos de teclado para ver contrato y agregar pagos. &#xa;- Mejora de velocidad&#xa;&#xa;&#xa;V1.0&#xa;Primera Versi&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="V1.2.4(19072022)&#xa;- Mejora cadena de conexi&#xf3;n&#xa;&#xa;V1.2.3 (12102021)&#xa;- Soluci&#xf3;n a un problema con el reporte que no mostraba los clientes activos actuales.&#xa;&#xa;V1.2.2 (06092021)&#xa;- Correcci&#xf3;n se reemplaza un afiliado al agregar otro.&#xa;&#xa;V1.2 (04082021)&#xa;- Mejora de la velocidad&#xa;- Mejora al guardar pagos&#xa;- Nuevos atajos de teclados&#xa;- Mejora al cargar registros de afiliados&#xa;- Soluci&#xf3;n a un problema que imped&#xed;a mostrar traslados y fechas de derechos&#xa;&#xa;&#xa;V1.1 (09072021)&#xa;&#xa;- Correcci&#xf3;n al limpiar contrato al buscar uno nuevo&#xa;- Nuevos atajos de teclado para ver contrato y agregar pagos. &#xa;- Mejora de velocidad&#xa;&#xa;&#xa;V1.0&#xa;Primera Versi&#xf3;n"/>
                 <Property name="wrapStyleWord" type="boolean" value="true"/>
               </Properties>
             </Component>
